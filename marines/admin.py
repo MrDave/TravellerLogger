@@ -1,3 +1,7 @@
 from django.contrib import admin
+from marines.models import Hireling
 
-# Register your models here.
+
+@admin.register(Hireling)
+class HirelingAdmin(admin.ModelAdmin):
+    pass
