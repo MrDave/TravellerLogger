@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Planets - Traveller Logger</title>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Planets</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Planets</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-body">
+                DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+                <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+                .
+            </div>
+        </div>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                DataTable Example
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Planet ID</th>
+                        <th>Wiki Link</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Planet ID</th>
+                        <th>Wiki Link</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    {% for planet in planets %}
+                    <tr>
+                        <td>{{ planet.name }}</td>
+                        <td>{{ planet.planet_id }}</td>
+                        <td>{{ planet.wiki_link }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
