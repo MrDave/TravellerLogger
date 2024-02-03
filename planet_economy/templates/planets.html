@@ -36,7 +36,7 @@
                 {% for planet in planets %}
                   <tr>
                     <td>
-                      <a href={{ planet.id }}>{{ planet.name }}</a>
+                      <a href="{% url 'planet_details' planet_id=planet.id %}">{{ planet.name }}</a>
                     </td>
                     <td>{{ planet.planet_id }}</td>
                     <td>
