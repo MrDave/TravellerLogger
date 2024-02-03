@@ -12,10 +12,10 @@ def planet_list(request):
 
 
 def planet_details(request, planet_id):
-    planet = get_object_or_404(Planet, planet_id=planet_id)
-    payload = {
-        "name": planet.name,
-        "planet_id": planet.planet_id,
-        "wiki_link": planet.wiki_link
+    planet = get_object_or_404(Planet, id=planet_id)
+    context = {
+        "planet": planet,
+        "wares": planet.wares.all().prefetch_related("ware")
     }
-    return JsonResponse(payload)
+    return render(request, "planet_details.html", context)
+

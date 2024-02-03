@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from planet_economy import views as planet_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("planets/", include("planet_economy.urls"))
+    path("planets/", planet_views.planet_list, name="planet_list"),
+    path("planets/<int:planet_id>", planet_views.planet_details, name="planet_details")
 ]

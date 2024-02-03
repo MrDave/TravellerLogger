@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>{{ planet.name }} - Traveller Logger</title>
+{% endblock %}
+
+{% block content %}
+  <div class="content-wrapper">
+  <div class="page-header">
+    <h3 class="page-title">Planetary Economics </h3>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="/planets/">Planets</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ planet.name }}</li>
+      </ol>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Wares</h4>
+          <p class="card-description"> Buying and selling prices
+          </p>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>Ware</th>
+                  <th>Base price, kCr</th>
+                  <th>Purchase modifier</th>
+                  <th>Sale modifier</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for ware in wares %}
+                  <tr>
+                    <td>
+                      {{ ware.ware }}
+                    </td>
+                    <td class="text-warning">{{ ware.ware.base_price }}</td>
+                    {% if not ware.purchase_price %}
+                      <td> - </td>
+                    {% elif ware.purchase_price < 100 %}
+                      <td class="text-success">{{ ware.purchase_price }} %</>
+                    {% elif ware.purchase_price == 100 %}
+                      <td>{{ ware.purchase_price }} %</>
+                    {% else %}
+                      <td class="text-danger">{{ ware.purchase_price }} %</>
+                    {% endif %}
+                    {% if not ware.sale_price %}
+                      <td> - </td>
+                    {% elif ware.sale_price > 100 %}
+                      <td class="text-success">{{ ware.sale_price }} %</>
+                    {% elif ware.sale_price == 100 %}
+                      <td>{{ ware.sale_price }} %</>
+                    {% else %}
+                      <td class="text-danger">{{ ware.sale_price }} %</>
+                    {% endif %}
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
