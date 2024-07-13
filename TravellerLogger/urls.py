@@ -20,6 +20,8 @@ from planet_economy import views as planet_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # path("", planet_views.index, name="index"),
     path("planets/", planet_views.planet_list, name="planet_list"),
-    path("planets/<int:planet_id>", planet_views.planet_details, name="planet_details")
+    path("planets/<int:planet_id>", planet_views.planet_details, name="planet_details"),
+    path("wares", planet_views.wares_list, name="wares_list")
 ]
