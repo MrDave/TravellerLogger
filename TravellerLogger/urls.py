@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from planets.views import planet_list, index
+from planets import views as planet_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name="index"),
-    path('planets/', planet_list, name="planet_list")
+    path('', planet_views.index, name="index"),
+    path('planets/', planet_views.planet_list, name="planet_list"),
+    path("planets/<int:planet_id>", planet_views.planet_details, name="planet_details")
 ]
