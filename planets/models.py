@@ -24,7 +24,7 @@ class Planet(models.Model):
 
 
 class Ware(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
     base_price = models.DecimalField(decimal_places=3, max_digits=8, verbose_name="base cost, kCr")
 
     class Meta:
