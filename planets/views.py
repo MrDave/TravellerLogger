@@ -44,6 +44,7 @@ def planet_details(request, planet_id):
 
 def planet_form_details(request, planet_id):
     planet = get_object_or_404(Planet, pk=planet_id)
+    wares_list = planet.wares.all().prefetch_related("ware")
 
     queryset = PlanetWare.objects.order_by("ware__name")
 
@@ -60,6 +61,7 @@ def planet_form_details(request, planet_id):
         formset = PlanetWareInlineFormSet(queryset=queryset, instance=planet)
     context = {
         "planet": planet,
+        "wares_list": wares_list,
         "map_render_link": map_render_link,
         "formset": formset,
     }

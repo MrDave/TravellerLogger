@@ -9,9 +9,19 @@
 
 <h2>Jump map render</h2>
 <img src="{{ map_render_link }}"></li>
-<form method="post">
-  {% csrf_token %}
-  {{ formset }}
-  <input type="submit" value="Submit">
-</form>
+<h2>Wares list</h2>
+<div id="ware-list">
+  {% for ware in wares_list %}
+    <p>{{ ware.ware.name }} | Buy: {{ ware.purchase_price }} | Sell: {{ ware.sell_price }}</p>
+  {% endfor %}
+  <button id="edit-button">Edit</button>
+</div>
+<div id="ware-form" style="display: none">
+  <form method="post">
+    {% csrf_token %}
+    {{ formset }}
+    <input type="submit" value="Submit">
+  </form>
+  <button id="cancel-button" style="display: none">Cancel</button>
+</div>
 {% endblock %}
