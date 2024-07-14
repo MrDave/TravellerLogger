@@ -5,10 +5,13 @@
 {% block content %}
 <h1>{{ planet.name }}</h1>
 <p>Map coordinates: {{ planet.planet_coords }}</p>
-<p>Wiki link: <a href={{ planet.wiki_link }}>{{ planet.wiki_link }}</a></p>
+<p>Wiki link: <a href="{{ planet.wiki_link }}">{{ planet.wiki_link }}</a></p>
 
 <h2>Jump map render</h2>
-<img src="{{ map_render_link }}"></li>
+<div id="jump-map">
+  <img src="{{ map_render_link }}"></li>
+  <p>Jump map from <a href="https://travellermap.com/go/Trojan%20Reach/{{ planet.planet_coords }}">Travellermap.com</a></p>
+</div>
 <h2>Wares list</h2>
 <div id="ware-list">
   {% for ware in wares_list %}
