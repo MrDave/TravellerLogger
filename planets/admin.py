@@ -1,5 +1,5 @@
 from django.contrib import admin
-from planets.models import Planet, PlanetWare, Ware
+from planets.models import Planet, PlanetWare, Ware, MapSector
 
 
 @admin.register(Planet)
@@ -14,4 +14,9 @@ class WareAdmin(admin.ModelAdmin):
 
 @admin.register(PlanetWare)
 class PlanetWareAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(MapSector)
+class MapSectorAdmin(admin.ModelAdmin):
     pass

@@ -3,8 +3,16 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.urls import reverse
 
 
+class MapSector(models.Model):
+    name = models.CharField(max_length=20, verbose_name="sector name")
+
+    def __str__(self):
+        return self.name
+
+
 class Planet(models.Model):
     name = models.CharField(max_length=20, verbose_name="planet name")
+    sector = models.ForeignKey(MapSector, on_delete=models.CASCADE)
     planet_coords = models.CharField(max_length=4, blank=True)
     wiki_link = models.TextField(blank=True)
 
