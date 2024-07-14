@@ -22,5 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', planet_views.index, name="index"),
     path('planets/', planet_views.planet_list, name="planet_list"),
-    path("planets/<int:planet_id>", planet_views.planet_details, name="planet_details")
+    path("planets/<int:planet_id>", planet_views.planet_form_details, name="planet_details")
 ]

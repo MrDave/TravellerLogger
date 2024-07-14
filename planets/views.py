@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from planets.models import Planet, PlanetWare
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.forms import inlineformset_factory, BaseInlineFormSet
 
 
 def index(request):
@@ -39,3 +40,27 @@ def planet_details(request, planet_id):
         ]
     }
     return JsonResponse(response, json_dumps_params={"ensure_ascii": False, "indent": 2})
+
+
+def planet_form_details(request, planet_id):
+    planet = get_object_or_404(Planet, pk=planet_id)
+
+    queryset = PlanetWare.objects.order_by("ware__name")
+
+    PlanetWareInlineFormSet = inlineformset_factory(Planet, PlanetWare, fields=["ware", "purchase_price", "sell_price"])
+
+    map_render_link = f"https://travellermap.com/api/jumpmap?sector=Trojan+Reach&hex={planet.planet_coords}&jump=3"
+
+    if request.method == "POST":
+        formset = PlanetWareInlineFormSet(request.POST, queryset=queryset, instance=planet)
+        if formset.is_valid():
+            formset.save()
+
+    else:
+        formset = PlanetWareInlineFormSet(queryset=queryset, instance=planet)
+    context = {
+        "planet": planet,
+        "map_render_link": map_render_link,
+        "formset": formset,
+    }
+    return render(request, "planet_details.html", context)
