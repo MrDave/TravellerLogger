@@ -1,11 +1,15 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.urls import reverse
 
 
 class Planet(models.Model):
     name = models.CharField(max_length=20, verbose_name="planet name")
     planet_coords = models.CharField(max_length=4, blank=True)
     wiki_link = models.TextField(blank=True)
+
+    def get_absolute_url(self):
+        return reverse("planet_details", kwargs={"planet_id": self.pk})
 
     def __str__(self):
         return self.name

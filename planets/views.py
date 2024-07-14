@@ -9,6 +9,7 @@ def index(request):
     return JsonResponse({"Welcome": "to Traveller Logger"})
 
 
+# TODO: write normal views and move API views to API app
 def planet_list(request):
     planets = Planet.objects.all()
     response = {
@@ -48,7 +49,12 @@ def planet_form_details(request, planet_id):
 
     queryset = PlanetWare.objects.order_by("ware__name")
 
-    PlanetWareInlineFormSet = inlineformset_factory(Planet, PlanetWare, fields=["ware", "purchase_price", "sell_price"])
+    PlanetWareInlineFormSet = inlineformset_factory(
+        Planet,
+        PlanetWare,
+        fields=["ware", "purchase_price", "sell_price"],
+        extra=1
+    )
 
     map_render_link = f"https://travellermap.com/api/jumpmap?sector=Trojan+Reach&hex={planet.planet_coords}&jump=3"
 
@@ -56,6 +62,7 @@ def planet_form_details(request, planet_id):
         formset = PlanetWareInlineFormSet(request.POST, queryset=queryset, instance=planet)
         if formset.is_valid():
             formset.save()
+            return HttpResponseRedirect(planet.get_absolute_url())
 
     else:
         formset = PlanetWareInlineFormSet(queryset=queryset, instance=planet)
