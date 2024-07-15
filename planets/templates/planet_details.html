@@ -14,9 +14,37 @@
 </div>
 <h2>Wares list</h2>
 <div id="ware-list">
-  {% for ware in wares_list %}
-    <p>{{ ware.ware.name }} | Buy: {{ ware.purchase_price }} | Sell: {{ ware.sell_price }}</p>
-  {% endfor %}
+  <table id="planetWaresTable" class="display">
+    <thead>
+      <tr>
+        <th>Ware</th>
+        <th>Base price, kCr</th>
+        <th>Purchase mod, %</th>
+        <th>Sell mode, %</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for ware in wares_list %}
+        <tr>
+          <th>{{ ware.ware.name }}</th>
+          <th>{{ ware.ware.base_price|floatformat }}</th>
+          {% if ware.purchase_price %}
+            <th>{{ ware.purchase_price }}%</th>
+          {% else %}
+            <th> - </th>
+          {% endif %}
+          {% if ware.sell_price %}
+            <th>{{ ware.sell_price }}%</th>
+          {% else %}
+            <th> - </th>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<!--  {% for ware in wares_list %}-->
+<!--    <p>{{ ware.ware.name }} | Buy: {{ ware.purchase_price }} | Sell: {{ ware.sell_price }}</p>-->
+<!--  {% endfor %}-->
   <button id="edit-button">Edit</button>
 </div>
 <div id="ware-form" style="display: none">
