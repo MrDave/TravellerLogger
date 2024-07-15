@@ -1,10 +1,11 @@
-from django.shortcuts import render
-from planets.models import Planet, PlanetWare
+from django.conf import settings
+from django.forms import inlineformset_factory
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.forms import inlineformset_factory, BaseInlineFormSet
-from django.conf import settings
+from django.shortcuts import render
+
 from planets.helper_functions import build_jump_map_link
+from planets.models import Planet, PlanetWare
 
 
 def index(request):

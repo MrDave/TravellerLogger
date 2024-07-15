@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from planets.models import Planet, PlanetWare, Ware, MapSector
 
 
