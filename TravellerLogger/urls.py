@@ -17,10 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from planets import views as planet_views
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', planet_views.index, name="index"),
     path('planets/', planet_views.planet_list, name="planet_list"),
     path("planets/<int:planet_id>", planet_views.planet_form_details, name="planet_details")
-]
+] + debug_toolbar_urls()
