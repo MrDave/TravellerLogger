@@ -146,3 +146,11 @@ MEDIA_URL = "media/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Traveller Map API options for Jump Map renders
+# https://travellermap.com/doc/api#jump-map-render-hexes-within-n-parsecs
+TRAVELLER_API_CONFIG = {
+    "jump": 3,
+    "scale": 64,
+    "options": 9009,
+}

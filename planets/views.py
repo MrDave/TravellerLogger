@@ -3,6 +3,8 @@ from planets.models import Planet, PlanetWare
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.forms import inlineformset_factory, BaseInlineFormSet
+from django.conf import settings
+from planets.helper_functions import build_jump_map_link
 
 
 def index(request):
@@ -28,7 +30,7 @@ def planet_list(request):
 
 def planet_details(request, planet_id):
     planet = get_object_or_404(Planet, id=planet_id)
-    map_render_link = f"https://travellermap.com/api/jumpmap?sector=Trojan+Reach&hex={planet.planet_coords}&jump=3"
+    map_render_link = build_jump_map_link(planet.sector, planet.planet_coords, **settings.TRAVELLER_API_CONFIG)
     wares_list = planet.wares.all().prefetch_related("ware")
     response = {
         "name": planet.name,
@@ -45,7 +47,7 @@ def planet_details(request, planet_id):
 
 def planet_form_details(request, planet_id):
     planet = get_object_or_404(Planet, pk=planet_id)
-    wares_list = planet.wares.all().prefetch_related("ware")
+    wares_list = planet.wares.all().prefetch_related("ware").order_by("ware__name")
 
     queryset = PlanetWare.objects.order_by("ware__name")
 
@@ -56,7 +58,7 @@ def planet_form_details(request, planet_id):
         extra=1
     )
 
-    map_render_link = f"https://travellermap.com/api/jumpmap?sector=Trojan+Reach&hex={planet.planet_coords}&jump=3"
+    map_render_link = build_jump_map_link(planet.sector, planet.planet_coords, **settings.TRAVELLER_API_CONFIG)
 
     if request.method == "POST":
         formset = PlanetWareInlineFormSet(request.POST, queryset=queryset, instance=planet)
