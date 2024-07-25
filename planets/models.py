@@ -1,6 +1,9 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.urls import reverse
+from urllib import parse
+from planets.helper_functions import build_jump_map_link
+from django.conf import settings
 
 
 class MapSector(models.Model):
@@ -18,6 +21,12 @@ class Planet(models.Model):
 
     def get_absolute_url(self):
         return reverse("planet_details", kwargs={"planet_id": self.pk})
+
+    def map_link(self):
+        return parse.urljoin("https://travellermap.com/go/", f"{self.sector}/{self.planet_coords}")
+
+    def map_render_link(self):
+        return build_jump_map_link(self.sector.name, str(self.planet_coords), **settings.TRAVELLER_API_CONFIG)
 
     def __str__(self):
         return self.name

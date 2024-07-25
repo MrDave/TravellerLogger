@@ -1,4 +1,4 @@
-import requests
+from urllib import parse
 
 
 def build_jump_map_link(planet_sector, planet_coords, jump=3, **kwargs):
@@ -10,22 +10,36 @@ def build_jump_map_link(planet_sector, planet_coords, jump=3, **kwargs):
         jump (int): jump distance in parsecs (hexes) around the planet to render.
         **kwargs: other API options. https://travellermap.com/doc/api#jump-map-render-hexes-within-n-parsecs.
     """
-    url = "https://travellermap.com/api/jumpmap"
-    payload = {
+    query = {
         "sector": planet_sector,
         "hex": planet_coords,
         "jump": jump,
         **kwargs
     }
 
-    # r = requests.get(url, params=payload)
-    # r.raise_for_status()
+    url = parse.urlunparse(
+        [
+            "https",
+            "travellermap.com",
+            "/api/jumpmap",
+            "",
+            parse.urlencode(query),
+            ""
+        ]
+    )
+    return url
 
-    # return r.url
 
-    req = requests.Request("GET", url).prepare()
-    req.prepare_url(url, params=payload)
-    return req.url
+def build_map_link(planet_sector, planet_coords):
+    url = parse.urlunparse([
+        "https",
+        "travellermap.com",
+        f"/go/{planet_sector}/{planet_coords}",
+        "",
+        "",
+        "",
+    ])
+    return url
 
 
 # Unused function for downloading rendered jump maps.

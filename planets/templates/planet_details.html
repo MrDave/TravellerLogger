@@ -9,23 +9,24 @@
 
 <h2>Jump map render</h2>
 <div id="jump-map">
-  <img src="{{ map_render_link }}"></li>
-  <p>Jump map from <a href="https://travellermap.com/go/{{ planet.sector }}/{{ planet.planet_coords }}">Travellermap.com</a></p>
+  <img src="{{ planet.map_render_link }}"></li>
+  <p>Jump map from <a href="{{ planet.map_link }}">Travellermap.com</a></p>
 </div>
 <h2>Wares list</h2>
 <div id="ware-list">
-  <table id="planetWaresTable" class="display">
+  <table id="planetWaresTable">
     <thead>
       <tr>
         <th>Ware</th>
         <th>Base price, kCr</th>
         <th>Purchase mod, %</th>
         <th>Sell mode, %</th>
+        <th>Edit</th>
       </tr>
     </thead>
     <tbody>
       {% for ware in wares_list %}
-        <tr>
+        <tr pware-id="{{ ware.pk }}">
           <th>{{ ware.ware.name }}</th>
           <th>{{ ware.ware.base_price|floatformat }}</th>
           {% if ware.purchase_price %}
@@ -38,19 +39,42 @@
           {% else %}
             <th> - </th>
           {% endif %}
+          <th>
+            <button class="edit-button" id="edit-pw-{{ ware.pk }}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m16.475 5.408l2.117 2.117m-.756-3.982L12.109 9.27a2.118 2.118 0 0 0-.58 1.082L11 13l2.648-.53c.41-.082.786-.283 1.082-.579l5.727-5.727a1.853 1.853 0 1 0-2.621-2.621"/><path d="M19 15v3a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3"/></g></svg>
+            </button>
+          </th>
         </tr>
+<!--        <tr style="display: none" class="edit-form-row" pware-id="{{ ware.pk }}">-->
+<!--        </tr>-->
       {% endfor %}
     </tbody>
   </table>
-<!--  {% for ware in wares_list %}-->
-<!--    <p>{{ ware.ware.name }} | Buy: {{ ware.purchase_price }} | Sell: {{ ware.sell_price }}</p>-->
-<!--  {% endfor %}-->
   <button id="edit-button">Edit</button>
 </div>
 <div id="ware-form" style="display: none">
   <form method="post">
     {% csrf_token %}
-    {{ formset }}
+    <table id="planet-wares-edit-table">
+      <thead>
+        <tr>
+          <th>Ware</th>
+          <th>Purchase mod, %</th>
+          <th>Sell mode, %</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ formset.management_form }}
+        {% for form in formset %}
+          <tr>
+            <th>{{ form.ware }}</th>
+            <th>{{ form.purchase_price }}</th>
+            <th>{{ form.sell_price }}</th>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+<!--    {{ formset }}-->
     <input type="submit" value="Submit">
   </form>
   <button id="cancel-button" style="display: none">Cancel</button>

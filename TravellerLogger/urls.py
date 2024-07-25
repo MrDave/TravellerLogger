@@ -24,5 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', planet_views.index, name="index"),
     path('planets/', planet_views.planet_list, name="planet_list"),
-    path("planets/<int:planet_id>", planet_views.planet_form_details, name="planet_details")
+    path("planets/<int:planet_id>", planet_views.planet_form_details, name="planet_details"),
+    path("pwares/<int:pk>", planet_views.PlanetWareUpdateView.as_view(), name="pware_update")
 ] + debug_toolbar_urls()
