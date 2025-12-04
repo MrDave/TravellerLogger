@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'debug_toolbar',
     'planets.apps.PlanetsConfig',
+    'space_calendar',
 
 ]
 
