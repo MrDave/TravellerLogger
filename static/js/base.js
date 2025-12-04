@@ -21,3 +21,10 @@ cancelButton.addEventListener('click', () => {
   cancelButton.style.display = 'none';
   editButton.style.display = 'block';
 });
+
+let table = new DataTable('#planetWaresTable', {
+    "paging": true,
+    "ordering": true,
+    "info": true,
+    "searching": true,
+});
