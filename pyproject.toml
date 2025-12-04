@@ -1,0 +1,28 @@
+[project]
+name = "travellerlogger"
+version = "0.1.0"
+description = "Expenses, economics and private army manager for Traveller 2e RPG"
+authors = [
+    {name = "David Schnoll",email = "davidschnoll@gmail.com"}
+]
+license = {text = "GNU GPLv3"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django (==5.0.*)",
+    "environs (>=14.5.0,<15.0.0)",
+    "requests (>=2.32.3,<2.33.0)"
+]
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar (>=4.4.6,<4.5.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+package-mode = false
