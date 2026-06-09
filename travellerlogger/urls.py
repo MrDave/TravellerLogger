@@ -1,8 +1,8 @@
 """
-URL configuration for TravellerLogger project.
+URL configuration for travellerlogger project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.0/topics/http/urls/
+    https://docs.djangoproject.com/en/6.0/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -14,16 +14,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from debug_toolbar.toolbar import debug_toolbar_urls
 from django.contrib import admin
 from django.urls import path
 
-from planets import views as planet_views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', planet_views.index, name="index"),
-    path('planets/', planet_views.planet_list, name="planet_list"),
-    path("planets/<int:planet_id>", planet_views.planet_form_details, name="planet_details"),
-    path("pwares/<int:pk>", planet_views.PlanetWareUpdateView.as_view(), name="pware_update")
-] + debug_toolbar_urls()
+]

@@ -1,22 +1,25 @@
 [project]
 name = "travellerlogger"
-version = "0.1.0"
-description = "Expenses, economics and private army manager for Traveller 2e RPG"
+version = "0.2.0"
+description = "Django-based app to track trade and logs for Traveller RPG"
 authors = [
     {name = "David Schnoll",email = "davidschnoll@gmail.com"}
 ]
-license = {text = "GNU GPLv3"}
+license = "GPL-3.0-or-later"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.14"
 dependencies = [
-    "django (==5.2)",
-    "environs (>=14.5.0,<15.0.0)",
-    "requests (>=2.32.3,<2.33.0)"
+    "django (>=6.0.6,<7.0.0)",
+    "environs (>=15.0.1,<16.0.0)",
+    "httpx (>=0.28.1,<0.29.0)",
+    "dj-database-url (>=3.1.2,<4.0.0)",
+    "pydantic (>=2.13.4,<3.0.0)"
 ]
 
 [dependency-groups]
 dev = [
-    "django-debug-toolbar (>=4.4.6,<4.5.0)"
+    "django-debug-toolbar (>=6.3.0,<7.0.0)",
+    "flake8 (>=7.3.0,<8.0.0)"
 ]
 
 
