@@ -1,0 +1,63 @@
+{% load static %}
+
+{% partialdef website-logo %}  
+  <img alt="logo" src="{% static 'icons/Earth.png' %}" class="circle extra">
+{% endpartialdef %}
+
+{% partialdef main-menu %}
+  <a href="{% url 'home-page' %}">
+    <i>home</i>
+    <span>Home</span>
+  </a>
+  <a>
+    <i>planet</i>
+    <span>Planets</span>
+  </a>
+  <a>
+    <i>price_change</i>
+    <span>Market wares</span>
+  </a>
+  <a>
+    <i>note_stack</i>
+    <span>Captain's log</span>
+  </a>
+  <a>
+    <i>more_vert</i>
+    <span>More</span>
+  </a>
+{% endpartialdef %}
+
+
+<nav class="left max l">
+  <header>
+    <nav>
+      {% partial website-logo %}  
+      <h6>Traveller Logger</h6>
+    </nav>
+  </header>
+  {% partial main-menu %}
+  <div class="divider"></div>
+  <a>
+    <i>widgets</i>
+    <span>Widgets</span>
+  </a>
+  <a>
+    <i>chat</i>
+    <span>Chat</span>
+  </a>
+  <a>
+    <i>help</i>
+    <span>Help</span>
+  </a>  
+</nav>
+
+<nav class="left m">
+  <header>
+    {% partial website-logo %}
+  </header>
+  {% partial main-menu %}
+</nav>
+
+<nav class="bottom s">
+  {% partial main-menu %}
+</nav>
