@@ -18,7 +18,10 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
+from planets.views import PlanetListView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name="base.html"), name="home-page")
+    path('', TemplateView.as_view(template_name="base.html"), name="home-page"),
+    path('planets/', PlanetListView.as_view(), name="planet-list"),
 ]

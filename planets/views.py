@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.views.generic import ListView
+from planets.models import Planet
 
-# Create your views here.
+
+class PlanetListView(ListView):
+    model = Planet
+    context_object_name = "planet_list"

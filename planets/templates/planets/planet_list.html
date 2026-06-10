@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- <img class="extra" src="{% static 'images/rotating_planet.gif' %}"> -->
+     <ul>
+        {% for planet in planet_list %}
+            <li>
+                {{ planet.name }}
+            </li>
+        {% endfor %}
+     </ul>
+{% endblock %}
