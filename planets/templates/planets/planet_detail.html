@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Traveller logger - {{planet.name }}{% endblock %}
+
+{% block content %}
+  <div>
+    <aside class="right padding">
+      <img class="responsive center-align" src="{{ planet.map_render_link }}">
+      <p class="center-align">Jump map from <a class="link" href="{{ planet.map_link }}">Travellermap.com</a></p>
+    </aside>
+    <h2>{{ planet.name }}</h2>
+    <h6><b>Map coordinates:</b> {{planet.sector.name}} - {{ planet.planet_coordinates }}</h6>
+    <h7><b>Wiki link:</b> <a class="link" href="{{ planet.wiki_link }}">{{ planet.wiki_link }}</a></h7>
+    
+    <h6>Trade goods</h6>
+    <div class="large-height scroll surface">
+      <table class="border center-align">
+        <thead class="fixed">
+          <tr>
+            <th>Header</th>
+            <th>Header</th>
+            <th>Header</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>meep</td>
+          </tr>
+          <tr>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+          </tr>
+          <tr>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+          </tr>
+          <tr>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+          </tr>
+          <tr>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+          </tr>
+          <tr>
+            <td>Cell</td>
+            <td>Cell</td>
+            <td>Cell</td>
+          </tr>
+        </tbody>
+        <tfoot class="fixed">
+          <tr>
+            <th>Footer</th>
+            <th>Footer</th>
+            <th>Footer</th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+{% endblock %}

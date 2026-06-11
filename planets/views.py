@@ -9,6 +9,7 @@ class PlanetListView(ListView):
 
 class PlanetDetailView(DetailView):
     model = Planet
+    context_object_name = "planet"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
